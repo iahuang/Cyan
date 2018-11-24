@@ -1,5 +1,5 @@
 # Cyan
-## The dynamically-typed, compiled programming language 
+**A dynamically-typed, compiled programming language, designed for speed and usability**
 
 > upload your code to Github ffs
 
@@ -14,3 +14,7 @@ This language is a work in progress. The repository (a horible mess at the momen
 ## How does it work?
 
 The language compiler is an intermediate program that parses the Cyan code and translates it into C++ code. This new code is then actually compiled by `clang` or whatever, producing a standalone executable.
+
+## The C++ backend
+
+Honestly, I don't even know how it works, and I wrote the stupid thing. This is partially because the system is a result of mostly trial and error, and because I succ at C++
