@@ -2,7 +2,7 @@
 #include "../main.hpp"
 #include "cyfunc.hpp"
 
-namespace nativetypes {
+namespace types {
     obj_ptr toString2(obj_ptr self, obj_ptr* args) { return self; }
 
     obj_ptr CyString(CyMemory& loc, string s) {
@@ -12,4 +12,4 @@ namespace nativetypes {
         msg->properties["toString"] = f;
         return msg;
     }
-}  // namespace nativetypes
+}  // namespace types

@@ -4,11 +4,11 @@
 #include <unordered_map>
 #include <vector>
 #include "main.hpp"
-#include "nativetypes/cyint.hpp"
-#include "nativetypes/cystring.hpp"
+#include "types/cyint.hpp"
+#include "types/cystring.hpp"
 
 using namespace std;
-using namespace nativetypes;
+using namespace types;
 
 void println(string s) { cout << s << endl; }
 
