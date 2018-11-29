@@ -4,15 +4,16 @@
 #include <unordered_map>
 #include <vector>
 
-#include "cyan.hpp"
+#include "memory.hpp"
+#include "program.hpp"
 
 #include "types/cyint.hpp"
 #include "cyio.hpp"
 
-CyMemory global;
+Program prg;
 
 int main() {
-    obj_ptr o = types::CyInt(global, 1);
+    obj_ptr o = types::CyInt(prg.scope, 1);
     cyPrint(o);
     return 0;
 }

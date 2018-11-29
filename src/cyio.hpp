@@ -1,7 +1,7 @@
 #pragma once
 #include <any>
-#include "cyan.hpp"
-
+#include "memory.hpp"
+#include "types/cyint.hpp"
 void cyPrint(obj_ptr s) {
     std::cout << any_cast<string>(s.call("toString", NULL)->nativeValue)
               << endl;

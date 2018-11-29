@@ -1,5 +1,5 @@
 #pragma once
-#include "../cyan.hpp"
+#include "../memory.hpp"
 
 namespace types {
     obj_ptr CyFunc(CyMemory& loc, Fcall body) {
