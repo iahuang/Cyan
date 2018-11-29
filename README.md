@@ -19,4 +19,4 @@ The language compiler is an intermediate program that parses the Cyan code and t
 
 Honestly, I don't even know how it works, and I wrote the stupid thing. This is partially because the system is a result of mostly trial and error, and because I succ at C++
 
-Find out more about the language (here)[https://github.com/iahuang/Cyan/wiki]
+Find out more about the language [here](https://github.com/iahuang/Cyan/wiki)
