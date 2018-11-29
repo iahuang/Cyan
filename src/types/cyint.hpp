@@ -1,5 +1,5 @@
 #pragma once
-#include "../main.hpp"
+#include "../cyan.hpp"
 #include "cystring.hpp"
 
 namespace types {
