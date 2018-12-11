@@ -1,13 +1,12 @@
-#include <any>
-#include <iostream>
-#include <memory>
-#include <unordered_map>
-#include <vector>
 #include "memory.hpp"
 
 using namespace std;
 
 void println(string s) { cout << s << endl; }
+
+obj_ptr Object::get(string name) {
+    return properties[name];
+}
 
 obj_ptr CyMemory::allocate()  {
     pool.push_back(Object());
@@ -37,9 +36,15 @@ Object* obj_ptr::getLinked() const {
 
 Object* obj_ptr::operator->() const { return this->getLinked(); }
 
-obj_ptr obj_ptr::call(string name, obj_ptr* args) {
+obj_ptr obj_ptr::call(string name, vector<obj_ptr> args) {
     Object* linked = getLinked();
     any body = linked->properties[name]->nativeValue;
     Fcall method = any_cast<Fcall>(body);
-    return method(*this, args);
+    args.insert(args.begin(), *this);
+    return method(args);
+}
+
+obj_ptr obj_ptr::get(string name) {
+    Object* linked = getLinked();
+    return linked->properties[name];
 }

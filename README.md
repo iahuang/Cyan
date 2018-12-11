@@ -1,5 +1,5 @@
 # Cyan
-**A dynamically-typed, compiled programming language, designed for speed and usability**
+**A dynamically-typed, compiled programming language, designed for rapid prototyping**
 
 > upload your code to Github ffs
 

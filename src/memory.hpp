@@ -1,9 +1,16 @@
 #pragma once
+#include <any>
+#include <iostream>
+#include <memory>
+#include <unordered_map>
+#include <vector>
 
 using namespace std;
-
 class Object;
 class CyMemory;
+class Program;
+
+
 
 class obj_ptr {
     public:
@@ -13,8 +20,11 @@ class obj_ptr {
     obj_ptr();
     Object* getLinked() const;
     Object* operator->() const;
-    obj_ptr call(string name, obj_ptr* args);
+    obj_ptr call(string name, vector<obj_ptr> args);
+    obj_ptr get(string name);
 };
+
+typedef obj_ptr (*Fcall)(vector<obj_ptr>);
 
 class Object {
     public:
@@ -23,7 +33,9 @@ class Object {
     unordered_map<string, obj_ptr>
         properties;  // Class methods are properties, like in Python
     any nativeValue;
+    obj_ptr get(string name);
 };
+
 
 class CyMemory {
     public:
@@ -33,4 +45,7 @@ class CyMemory {
     int debug = 0;
 };
 
-typedef obj_ptr (*Fcall)(obj_ptr, obj_ptr*);
+class Program : public Object {
+    public:
+    CyMemory scope;
+};

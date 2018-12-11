@@ -1,8 +1,10 @@
 #pragma once
 #include <any>
 #include "memory.hpp"
-#include "types/cyint.hpp"
-void cyPrint(obj_ptr s) {
-    std::cout << any_cast<string>(s.call("toString", NULL)->nativeValue)
-              << endl;
+#include "types/native.hpp"
+
+obj_ptr cyPrint(vector<obj_ptr> args);
+
+namespace cyio {
+    obj_ptr init(CyMemory& loc);
 }

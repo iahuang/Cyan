@@ -1,6 +1,6 @@
 # Copyright mr. kadish is a big nerd 2018
 build:
-	g++-8 -std=c++17 ./src/main.cpp src/memory.cpp
+	g++ -std=c++17 ./src/main.cpp src/memory.cpp src/cyio.cpp src/types/native.cpp
 run:
-	g++-8 -std=c++17 ./src/main.cpp src/memory.cpp
+	make build
 	./a.out
