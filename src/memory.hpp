@@ -10,39 +10,28 @@ class Object;
 class CyMemory;
 class Program;
 
-
-
-class obj_ptr {
-    public:
-    int index;
-    CyMemory* source;
-    obj_ptr(int i, CyMemory* source);
-    obj_ptr();
-    Object* getLinked() const;
-    Object* operator->() const;
-    obj_ptr call(string name, vector<obj_ptr> args);
-    obj_ptr get(string name);
-};
-
-typedef obj_ptr (*Fcall)(vector<obj_ptr>);
+typedef Object (*Fcall)(vector<Object>);
 
 class Object {
     public:
+    Object(CyMemory& loc);
     int nativeType = 0;
     int debug = 20;
-    unordered_map<string, obj_ptr>
+    int index;
+    CyMemory source;
+    unordered_map<string, Object>
         properties;  // Class methods are properties, like in Python
     any nativeValue;
-    obj_ptr get(string name);
+    Object get(string name);
+    Object call(string name, vector<Object> args);
 };
 
 
 class CyMemory {
     public:
     vector<Object> pool;
-    obj_ptr allocate();
-    obj_ptr push(Object o);
     int debug = 0;
+    void allocate(Object& o);
 };
 
 class Program : public Object {
