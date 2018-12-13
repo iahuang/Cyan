@@ -22,6 +22,8 @@ class obj_ptr {
     Object* operator->() const;
     obj_ptr call(string name, vector<obj_ptr> args);
     obj_ptr get(string name);
+    vector<CyMemory*> references;
+    bool value;
 };
 
 typedef obj_ptr (*Fcall)(vector<obj_ptr>);
@@ -39,13 +41,12 @@ class Object {
 
 class CyMemory {
     public:
+    int scope = 0;
     vector<Object> pool;
     obj_ptr allocate();
     obj_ptr push(Object o);
     int debug = 0;
-};
-
-class Program : public Object {
-    public:
-    CyMemory scope;
+    CyMemory (CyMemory& parent);
+    CyMemory ();
+    ~CyMemory (); // Clean up any stored variables
 };

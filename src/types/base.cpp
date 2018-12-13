@@ -1,4 +1,4 @@
-#include "native.hpp"
+#include "base.hpp"
 
 namespace types {
     obj_ptr CyFunc(CyMemory& loc, Fcall body) {
@@ -13,6 +13,7 @@ namespace types {
     
     obj_ptr CyString(CyMemory& loc, string s) {
         obj_ptr msg = loc.allocate();
+        msg.value = true;
         msg->nativeValue = s;
         obj_ptr f = CyFunc(loc, cystring::toString);
         msg->properties["toString"] = f;
@@ -20,6 +21,7 @@ namespace types {
     }
     obj_ptr CyNull(CyMemory& loc) {
         obj_ptr x = loc.allocate();
+        x.value = true;
         return x;
     }
     namespace cyint {
@@ -29,6 +31,7 @@ namespace types {
     }
     obj_ptr CyInt(CyMemory& loc, int s) {
         obj_ptr x = loc.allocate();
+        x.value = true;
         x->nativeValue = s;
         obj_ptr f = CyFunc(loc, cyint::toString);
         x->properties["toString"] = f;

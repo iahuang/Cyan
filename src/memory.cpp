@@ -17,6 +17,14 @@ obj_ptr CyMemory::push(Object o) {
     return obj_ptr(static_cast<int>(pool.size()) - 1, this);
 }
 
+CyMemory::CyMemory() {
+    
+}
+
+CyMemory::CyMemory(CyMemory& parent) {
+    scope = parent.scope+1;
+}
+
 class CyFunction : Object {
     // An Object subclass with its own dedicated CyMemory for local variables
    public:

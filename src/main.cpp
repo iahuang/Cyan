@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "types/native.hpp"
+#include "types/base.hpp"
 #include "cyio.hpp"
 
 CyMemory root; // The root stack. Stores all imported modules, global variables, etc.

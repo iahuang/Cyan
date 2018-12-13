@@ -1,7 +1,7 @@
 #pragma once
 #include <any>
 #include "memory.hpp"
-#include "types/native.hpp"
+#include "types/base.hpp"
 
 obj_ptr cyPrint(vector<obj_ptr> args);
 
