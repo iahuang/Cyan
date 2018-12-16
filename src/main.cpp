@@ -6,21 +6,24 @@
 
 #include "types/base.hpp"
 #include "cyio.hpp"
+#include "memory.hpp"
+
+using namespace std;
 
 CyMemory root; // The root stack. Stores all imported modules, global variables, etc.
 
 namespace main_def { // Define properties associated with _this_ module
-    obj_ptr init (CyMemory& loc) {
-        obj_ptr p  = loc.allocate();
-        p->properties["test_variable"] = types::CyInt(loc, 12); // int test_variable = 12;
+    Object& init (CyMemory& loc) {
+        Object& p  = loc.allocate();
+        p.set("test_variable", types::CyInt(loc, 12)); // int test_variable = 12;
         return p;
     }
 }
 
-obj_ptr prg_main = main_def::init(root); // Initialize this module
-obj_ptr prg_cyio = cyio::init(root); // Initialize Cyan's stdio module
+Object& prg_main = main_def::init(root); // Initialize this module
+Object& prg_cyio = cyio::c_init(root); // Initialize Cyan's stdio module
 
 int main() {
-    prg_cyio.call("print", {prg_main.get("test_variable")}); // Print test_variable
+    prg_cyio.call("print", {&prg_main.get("test_variable")}); // Print test_variable
     return 0; // End C++ routine
 }

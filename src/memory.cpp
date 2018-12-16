@@ -4,18 +4,34 @@ using namespace std;
 
 void println(string s) { cout << s << endl; }
 
-obj_ptr Object::get(string name) {
-    return properties[name];
+Object& Object::get(string name) {
+    auto got = properties.find(name);
+    if (got == properties.end()) {
+        cerr<<"Error: Object has no property "<<name<<"\n";
+        abort();
+    }
+    return *properties[name];
+}
+void Object::set(string name, Object& to) {
+    properties[name] = &to;
+    if (!to.value) {
+        to.references.push_back(source);
+    }
 }
 
-obj_ptr CyMemory::allocate()  {
-    pool.push_back(Object());
-    return obj_ptr(static_cast<int>(pool.size()) - 1, this);
+Object& Object::call(string name, vector<Object*> args) {
+    auto f = any_cast<Fcall>(get(name).nativeValue);
+    return f(*this, args);
 }
-obj_ptr CyMemory::push(Object o) {
+
+Object& CyMemory::allocate() {
+    auto o = Object();
+    o.source = this;
     pool.push_back(o);
-    return obj_ptr(static_cast<int>(pool.size()) - 1, this);
+    return pool.back();
 }
+
+Object::Object() {}
 
 CyMemory::CyMemory() {
     
@@ -25,34 +41,13 @@ CyMemory::CyMemory(CyMemory& parent) {
     scope = parent.scope+1;
 }
 
+CyMemory::~CyMemory() { // Clean up stack variables
+    
+}
+
 class CyFunction : Object {
     // An Object subclass with its own dedicated CyMemory for local variables
    public:
     CyMemory local;
 };
 
-
-obj_ptr::obj_ptr(int i, CyMemory* source) {
-    index = i;
-    this->source = source;
-}
-obj_ptr::obj_ptr() {}  // Default constructor
-
-Object* obj_ptr::getLinked() const {
-    return &source->pool[index];
-}
-
-Object* obj_ptr::operator->() const { return this->getLinked(); }
-
-obj_ptr obj_ptr::call(string name, vector<obj_ptr> args) {
-    Object* linked = getLinked();
-    any body = linked->properties[name]->nativeValue;
-    Fcall method = any_cast<Fcall>(body);
-    args.insert(args.begin(), *this);
-    return method(args);
-}
-
-obj_ptr obj_ptr::get(string name) {
-    Object* linked = getLinked();
-    return linked->properties[name];
-}

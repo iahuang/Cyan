@@ -3,8 +3,8 @@
 #include "memory.hpp"
 #include "types/base.hpp"
 
-obj_ptr cyPrint(vector<obj_ptr> args);
+Object& cyPrint(vector<Object*> args);
 
 namespace cyio {
-    obj_ptr init(CyMemory& loc);
+    Object& c_init(CyMemory& loc);
 }

@@ -1,40 +1,40 @@
 #include "base.hpp"
 
 namespace types {
-    obj_ptr CyFunc(CyMemory& loc, Fcall body) {
-        obj_ptr f = loc.allocate();
-        f->nativeValue = body;
+    Object& CyFunc(CyMemory& loc, Fcall body) {
+        Object& f = loc.allocate();
+        f.nativeValue = body;
         return f;
     }
     namespace cystring {
-        obj_ptr toString(vector<obj_ptr> args) { return args[0]; }
+        Object& string_tostring(Object& self, vector<Object*> args){return *args[0];}
 
     }
     
-    obj_ptr CyString(CyMemory& loc, string s) {
-        obj_ptr msg = loc.allocate();
+    Object& CyString(CyMemory& loc, string s) {
+        Object& msg = loc.allocate();
         msg.value = true;
-        msg->nativeValue = s;
-        obj_ptr f = CyFunc(loc, cystring::toString);
-        msg->properties["toString"] = f;
+        msg.nativeValue = s;
+        Object& f = CyFunc(loc, cystring::string_tostring);
+        // msg.set("toString", f);
         return msg;
     }
-    obj_ptr CyNull(CyMemory& loc) {
-        obj_ptr x = loc.allocate();
+    Object& CyNull(CyMemory& loc) { 
+        Object& x = loc.allocate();
         x.value = true;
         return x;
     }
     namespace cyint {
-        obj_ptr toString(vector<obj_ptr> args) {
-            return CyString(*args[0].source, to_string(any_cast<int>(args[0]->nativeValue)));
+        Object& int_tostring(Object& self, vector<Object*> args) {
+            return CyString(*(self.source), to_string(any_cast<int>(self.nativeValue)));
         }
     }
-    obj_ptr CyInt(CyMemory& loc, int s) {
-        obj_ptr x = loc.allocate();
+    Object& CyInt(CyMemory& loc, int s) {
+        Object& x = loc.allocate();
         x.value = true;
-        x->nativeValue = s;
-        obj_ptr f = CyFunc(loc, cyint::toString);
-        x->properties["toString"] = f;
+        x.nativeValue = s;
+        Object& f = CyFunc(loc, cyint::int_tostring);
+        x.set("toString", f);
         return x;
     }
 }
