@@ -8,7 +8,8 @@ Object& cyPrint(Object& self, vector<Object*> args) {
 }
 
 Object& cyio::c_init(CyMemory& loc) {
-    Object& p = loc.allocate();
-    p.set("print", types::CyFunc(loc, cyPrint));
+    Object& p = loc.allocate("cyio_module");
+    Object& f = types::CyFunc(loc, cyPrint);
+    p.set("print", f);
     return p;
 }
