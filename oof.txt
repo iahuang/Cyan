@@ -1,8 +1,0 @@
-make build
-g++ -std=c++17 ./src/main.cpp src/memory.cpp
-./src/main.cpp:10:1: error: unknown type name 'CyMemory'
-CyMemory root; // The root stack. Stores all imported modules, global variables, etc.
-^
-1 error generated.
-make[1]: *** [build] Interrupt: 2
-make: *** [run] Interrupt: 2
