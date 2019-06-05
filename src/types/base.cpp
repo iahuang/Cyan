@@ -17,8 +17,11 @@ namespace types {
     }
     using namespace base_static;
     Object& CyFunc(CyMemory& loc, Fcall body) {
-        Object& f = loc.allocate("<function>");
-        f.nativeValue = body;
+        Object& f = loc.allocate<Function>("<function>");
+        ((Function*)&f)->body = body;
+        f.name = "Test";
+        Object o;
+        f.call(o, {});
         return f;
     }
     

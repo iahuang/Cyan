@@ -22,9 +22,12 @@ void Object::set(string name, Object& to) {
     to.references.emplace_back(this, name);  // Track reference to this object
 }
 
-Object& Object::call(string name, vector<Object*> args) {
-    auto f = any_cast<Fcall>(get(name).nativeValue);
-    return f(*this, args);
+Object& Object::call(Object& self, vector<Object*> args) {
+    cerr << "Error: Object "<<name<<" is not callable\n";
+    abort();
+}
+Object& Object::call_func(string name, vector<Object*> args) {
+    return get(name).call(*this,args);
 }
 
 void Object::unlink(Object& o) {  // Remove tracked references from Object o
@@ -44,8 +47,9 @@ Object& CyMemory::allocate(string name) {
     return pool.back();
 }
 
-Object::Object() {}
+Object::Object() {
 
+}
 Object::Object(string name, CyMemory* source) {
     this->name = name;
     this->source = source;

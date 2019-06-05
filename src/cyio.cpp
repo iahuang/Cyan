@@ -2,7 +2,7 @@
 
 Object& cyPrint(Object& self, vector<Object*> args) {
     Object& s = *args[0];
-    std::cout << any_cast<string>(s.call("toString", {}).nativeValue)
+    std::cout << any_cast<string>(s.call_func("toString", {}).nativeValue)
               << endl;
     return s;
 }

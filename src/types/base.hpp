@@ -1,5 +1,6 @@
 #pragma once
 #include "../memory.hpp"
+#include "native.hpp"
 
 namespace types {
     namespace base_static {
