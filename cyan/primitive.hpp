@@ -12,13 +12,16 @@ enum TypeCodes {
     Boolean,
     String,
     Object,
-    Null
+    Null,
+    NUMTYPECODES
 };
 
 
 struct Primitive {
     int type = TypeCodes::Null;
     byte data[8];
+
+    static Primitive null;
 
     ~Primitive();
     Primitive();

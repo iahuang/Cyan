@@ -5,7 +5,7 @@
 
 #include <stdexcept>
 
-struct CyObject: M_toString {
+struct CyObject: M_toString0 {
     int references = 0;
 
     CyObject() {
@@ -40,11 +40,11 @@ T* method(Primitive p) {
 }
 
 template <typename T>
-Primitive member(Primitive p) {
+Primitive& member(Primitive p) {
     CyObject* obj = getobj(p);
     T* ptr = dynamic_cast<T*>(obj);
     if (ptr == NULL) {
         throw std::invalid_argument("Class has no such member!");
     }
-    return ptr->member;
+    return ptr->value;
 }

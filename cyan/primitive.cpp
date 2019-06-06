@@ -4,6 +4,8 @@
 
 #include <cstring>
 
+Primitive Primitive::null = Primitive();
+
 Primitive::Primitive() {
 }
 

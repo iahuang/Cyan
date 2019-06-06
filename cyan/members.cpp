@@ -3,7 +3,7 @@
 #include "cyio.hpp"
 #include <sstream>
 
-Primitive M_toString::tostring(Primitive self) {
+Primitive M_toString0::toString0(Primitive self) {
     std::stringstream sstream;
     sstream << std::hex << self.unpack_value<unsigned long long>();
     std::string result = sstream.str();
