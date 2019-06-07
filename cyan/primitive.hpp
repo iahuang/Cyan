@@ -26,24 +26,27 @@ struct Primitive {
     ~Primitive();
     Primitive();
 
+    // ARC method to unreference the object that was potentially stored in this Primitive on reassignment
     void free_linked();
 
+    // Write a c++ type into the data buffer 
     template <typename T>
     void bind_value(T value) {
         *(T*)(data) = value;
     }
 
+    // Read the c++ type from the data buffer
     template <typename T>
     T unpack_value() const {
         return *(T*)(data);
     }
 
-    void assign(Primitive to);
-    void reassign(Primitive to);
+    void assign(Primitive to);      // var thing = to
+    void reassign(Primitive to);    // thing = to
 
     Primitive(const Primitive&);
     Primitive& operator =(const Primitive&);
 };
 
-Primitive create_int(int);
+Primitive create_int(int);      // Constructors for primitive datatypes
 Primitive create_float(float);

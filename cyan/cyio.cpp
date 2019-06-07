@@ -16,14 +16,15 @@ string _str_tostring(Primitive p) {
 }
 
 void cy_print(Primitive p) {
+    // Table of pointers to functions that prints the native c++ value of Primitive p
     string (*ts_callbacks[])(Primitive) = {
-        _tostring<int>,
-        _tostring<float>,
-        _tostring<bool>,
+        _tostring<int>, // if p.type == Integer
+        _tostring<float>, // if p.type == Float
+        _tostring<bool>, // etc.
         _str_tostring,
         _obj_tostring,
         _tostring_stub
 
     };
-    cout<<ts_callbacks[p.type](p)<<endl;
+    cout<<ts_callbacks[p.type](p)<<endl; // Lookup using the type of p
 }

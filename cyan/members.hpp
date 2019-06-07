@@ -3,6 +3,27 @@
 #include "primitive.hpp"
 #include "cystring.hpp"
 
+/*
+
+Method Convention:
+- name is the name of the method
+- x is the number of non-self arguments
+
+struct M_name {
+    virtual Primitive name[x](Primitive self, ...) {
+        etc.
+    }
+}
+
+Member Convention:
+- name is the name of the member
+
+struct M_name {
+    Primitive name = ... ;
+}
+
+ */
+
 struct M_length {
     Primitive value = create_int(0);
 };

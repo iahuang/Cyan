@@ -7,7 +7,7 @@
 
 template <typename T>
 string _tostring(Primitive p) {
-    return to_string(p.unpack_value<T>());
+    return to_string(p.unpack_value<T>()); // native to_string defined in <string>
 }
 
 string _obj_tostring(Primitive p);

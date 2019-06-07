@@ -12,12 +12,12 @@ struct CyObject: M_toString0 {
         add_reference();
     }
 
-    void add_reference();
-    void remove_reference();
+    void add_reference(); // ARC add reference
+    void remove_reference(); // ARC remove reference
 };
 
 template <typename T>
-Primitive create_obj() {
+Primitive create_obj() { // Create Primitive linked to a new CyObject
     Primitive p;
     CyObject* linked = new T();
     p.bind_value<CyObject*>(linked);
@@ -25,12 +25,12 @@ Primitive create_obj() {
     return p;
 }
 
-Primitive from_obj(CyObject* obj);
+Primitive from_obj(CyObject* obj); // Create a CyObject Primitive from an existing CyObject
 
-CyObject* getobj(Primitive p);
+CyObject* getobj(Primitive p); // Shorthand for p.unpack_value<CyObject*>
 
 template <typename T>
-T* method(Primitive p) {
+T* method(Primitive p) { // Returns the method class T for the object
     CyObject* obj = getobj(p);
     T* ptr = dynamic_cast<T*>(obj);
     if (ptr == NULL) {
@@ -40,7 +40,7 @@ T* method(Primitive p) {
 }
 
 template <typename T>
-Primitive& member(Primitive p) {
+Primitive& member(Primitive p) { // Returns the member of an object from the member class T
     CyObject* obj = getobj(p);
     T* ptr = dynamic_cast<T*>(obj);
     if (ptr == NULL) {
