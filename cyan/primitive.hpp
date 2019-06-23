@@ -7,12 +7,12 @@
 using namespace std;
 
 enum TypeCodes {
+    Null,
     Integer,
     Float,
     Boolean,
     String,
     Object,
-    Null,
     NUMTYPECODES
 };
 

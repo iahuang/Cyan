@@ -1,0 +1,21 @@
+template <typename A, typename B>
+Primitive add(Primitive a, Primitive b) {
+    Primitive p;
+    // Resulting type is whatever c++ thinks it should be. Make sure TypeCode is set correctly
+    p.bind_value((a.unpack_value<A>() + b.unpack_value<B>())); 
+    p.type = TypeCode;
+    return p;
+}
+
+Primitive invalid(Primitive a, Primitive b) {
+    // Stub function for when an type specification of an operation should be invalid
+    throw invalid_argument("Cannot add");
+}
+
+@begin
+
+@default invalid
+@overload int int int % add<>
+@overload int float % add<>
+@overload float bool % add<>
+@overload bool int % add<>
